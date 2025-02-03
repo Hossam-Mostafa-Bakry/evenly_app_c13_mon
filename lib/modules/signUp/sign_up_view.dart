@@ -1,12 +1,14 @@
 import 'package:evently_app_c13_mon_7pm/core/extensions/validations.dart';
 import 'package:evently_app_c13_mon_7pm/core/routes/page_routes_name.dart';
-import 'package:evently_app_c13_mon_7pm/core/utils/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../core/constants/app_assets.dart';
+import '../../core/services/firebase_auth_service.dart';
 import '../../core/theme/color_palette.dart';
 import '../../core/widgets/custom_text_field.dart';
+
+// CRUD Operations
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -141,7 +143,7 @@ class _SignUpViewState extends State<SignUpView> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      FirebaseServices.signUp(
+                      FirebaseAuthService.signUp(
                         _emailController.text,
                         _passwordController.text,
                       ).then(

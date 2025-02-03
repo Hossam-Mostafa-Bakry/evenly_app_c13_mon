@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../core/extensions/validations.dart';
-import '../../core/utils/firebase_services.dart';
+import '../../core/services/firebase_auth_service.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -97,7 +97,7 @@ class _SignInViewState extends State<SignInView> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      FirebaseServices.signIn(
+                      FirebaseAuthService.signIn(
                         _emailController.text,
                         _passwordController.text,
                       ).then(

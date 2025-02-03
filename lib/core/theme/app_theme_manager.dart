@@ -15,6 +15,12 @@ abstract class AppThemeManager {
           fontWeight: FontWeight.w500,
           color: ColorPalette.primaryColor,
         )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: ColorPalette.primaryColor,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: ColorPalette.white,
+      unselectedItemColor: ColorPalette.white,
+    ),
     textTheme: TextTheme(
       titleLarge: TextStyle(
         fontSize: 22,
@@ -25,5 +31,29 @@ abstract class AppThemeManager {
   );
   static ThemeData darkThemeData = ThemeData(
     scaffoldBackgroundColor: ColorPalette.secondaryDarkColor,
+    appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: ColorPalette.primaryColor,
+        ),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: ColorPalette.primaryColor,
+        )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: ColorPalette.secondaryDarkColor,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: ColorPalette.white,
+      unselectedItemColor: ColorPalette.white,
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontFamily: "Popines",
+        fontWeight: FontWeight.w700,
+      ),
+    ),
   );
 }

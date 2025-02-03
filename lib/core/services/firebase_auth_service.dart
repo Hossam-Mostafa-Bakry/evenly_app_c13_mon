@@ -4,7 +4,7 @@ import 'package:evently_app_c13_mon_7pm/core/services/snack_bar_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-abstract class FirebaseServices {
+abstract class FirebaseAuthService {
   static Future<bool> signUp(String emailAddress, String password) async {
     EasyLoading.show();
     try {

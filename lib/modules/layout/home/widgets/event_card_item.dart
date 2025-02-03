@@ -1,9 +1,17 @@
+import 'package:evently_app_c13_mon_7pm/core/services/firebase_firestore_serivce.dart';
+import 'package:evently_app_c13_mon_7pm/models/event_data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/theme/color_palette.dart';
 
 class EventCardItem extends StatelessWidget {
-  const EventCardItem({super.key});
+  final EventDataModel eventDataModel;
+
+  const EventCardItem({
+    super.key,
+    required this.eventDataModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +23,8 @@ class EventCardItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
         border: Border.all(color: ColorPalette.primaryColor, width: 1.5),
-        image: const DecorationImage(
-          image: AssetImage("assets/images/birthday_img.png"),
+        image: DecorationImage(
+          image: AssetImage(eventDataModel.eventImage),
           fit: BoxFit.cover,
         ),
       ),
@@ -33,7 +41,7 @@ class EventCardItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Text(
-              "21 Jan",
+              DateFormat("dd MMM").format(eventDataModel.eventDate),
               textAlign: TextAlign.center,
               style: theme.textTheme.titleLarge
                   ?.copyWith(height: 1, color: ColorPalette.primaryColor),
@@ -51,7 +59,7 @@ class EventCardItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Meeting for Updating The Development Method The Development Method ",
+                    eventDataModel.eventTitle,
                     textAlign: TextAlign.start,
                     style: theme.textTheme.titleSmall?.copyWith(
                       height: 1.2,
@@ -59,9 +67,26 @@ class EventCardItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Icon(
-                  Icons.favorite_border_outlined,
-                  color: ColorPalette.primaryColor,
+                GestureDetector(
+                  onTap: () {
+                    var eventData = EventDataModel(
+                      eventId: eventDataModel.eventId,
+                      eventTitle: eventDataModel.eventTitle,
+                      eventImage: eventDataModel.eventImage,
+                      eventDescription: eventDataModel.eventDescription,
+                      eventCategory: eventDataModel.eventCategory,
+                      eventDate: eventDataModel.eventDate,
+                      isFavorite: !eventDataModel.isFavorite,
+                    );
+
+                    FirebaseFirestoreService.updateEvent(eventData);
+                  },
+                  child: Icon(
+                    eventDataModel.isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border_outlined,
+                    color: ColorPalette.primaryColor,
+                  ),
                 )
               ],
             ),
